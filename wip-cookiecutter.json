@@ -1,0 +1,9 @@
+{
+  "full_name": "Ine Arts",
+  "email_address": "ine.arts@uantwerpen.be",
+  "github_username": "IneMEGAmaxi",
+  "project_name": "mandelbrot",
+  "package_name": "mandelbrot",
+  "project_short_description": "example calculating mandelbrot set",
+  "minimal_python_version": "3.9"
+}
