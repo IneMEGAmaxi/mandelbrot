@@ -4,7 +4,7 @@ N = 50
 def mandelbrot_set(c):
     z_old = 0
     for i in range(N):
-        z = z_old*z_old + c
+        z = z_old**2 + c
         if abs(z) > 2:
             return i
         z_old = z
@@ -24,7 +24,6 @@ def mandelbrot_img():
     for xi in range(x):
         for yi in range(y):
             img[yi, xi] = mandelbrot_set(c_val[xi, yi])
-
     return img
 
 if __name__ == '__main__':
