@@ -12,7 +12,7 @@ def mandelbrot_set(c):
     return -1
 
 def mandelbrot_img():
-    d = 100
+    d = 1000
     x = 3*d
     y = (int) (4*d/3)
     img = np.zeros((y, x))
