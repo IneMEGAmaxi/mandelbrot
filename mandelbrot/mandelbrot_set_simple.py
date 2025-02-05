@@ -1,4 +1,5 @@
 import numpy as np
+from math import log
 N = 50
 
 def mandelbrot_set(c):
@@ -25,6 +26,16 @@ def mandelbrot_img():
         for yi in range(y):
             img[yi, xi] = mandelbrot_set(c_val[xi, yi])
     return img
+
+def mandelbrot_set_smooth(c):
+    z_old = 0
+    for i in range(N):
+        z = z_old**2 + c
+        if abs(z) > 2:
+            return i + 1 - log(log(abs(z))) / log(2)
+        z_old = z
+    return -1
+
 
 if __name__ == '__main__':
     img = mandelbrot_img()

@@ -7,7 +7,19 @@ sys.path.insert(0,'.')
 
 from random import random
 import numpy as np
-import mandelbrot.mandelbrot_set as mb
+import mandelbrot.mandelbrot_set_simple as mb
+from mandelbrot.mandelbrot_set import Mandelbrot
+from mandelbrot.visualisation import show_image
+
+def test_mandelbrot_class():
+    d = 1000
+    m = Mandelbrot(50,d)
+    c = m.get_c_val()
+    assert c.shape == (int(4/3*d), 3*d)
+    img = m.mandelbrot_img()
+    assert img.shape == (int(4/3*d), 3*d)
+    assert img[0,0] == -1
+    show_image(img)
 
 def test_mandelbrot_set():
     # any complex nr norm>2 should return 0
@@ -22,11 +34,11 @@ def test_mandelbrot_set():
     # 0 +0j should return -1 (or <0)
     assert mb.mandelbrot_set(0+0j)<0
     
-def test_mandelbrot_img():
-    img = mb.mandelbrot_img()
-    from matplotlib import pyplot as plt
-    plt.imshow(img)
-    plt.show()
+# def test_mandelbrot_img():
+#     img = mb.mandelbrot_img()
+#     from matplotlib import pyplot as plt
+#     plt.imshow(img)
+#     plt.show()
 
 # ==============================================================================
 # The code below is for debugging a particular test in eclipse/pydev.
