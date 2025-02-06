@@ -18,5 +18,5 @@ def show_image(mb_img,N):
 if __name__ == '__main__':
     from mandelbrot_set import *
     m = Mandelbrot(10000,5000)
-    img = mandelbrot_img(m)
+    img = m.mandelbrot_img()
     show_image(img, m.N)

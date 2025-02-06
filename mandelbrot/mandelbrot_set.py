@@ -14,14 +14,17 @@ class Mandelbrot:
         y = np.linspace(self.ymin, self.ymax, int((self.ymax-self.ymin)*self.d))
         X, Y = np.meshgrid(x,y)
         return X + Y*1j
-    
-def mandelbrot_img(mb: Mandelbrot):
-    c_val = mb.c_val
-    N = mb.N
-    img = np.zeros(c_val.shape)
-    for (i, j), c in np.ndenumerate(c_val):
-        img[i,j] = escape_iter(c, N)
-    return img
+
+    def mandelbrot_img(self):
+        return self.get_escape_iter(self.c_val, self.N)
+
+    @staticmethod
+    @numba.jit
+    def get_escape_iter(c_val, N):
+        img = np.zeros(c_val.shape, dtype=np.int32)
+        for (i, j), c in np.ndenumerate(c_val):
+            img[i,j] = escape_iter(c, N)
+        return img
 
 @profile
 @numba.jit
@@ -35,6 +38,7 @@ def escape_iter(c, N):
 
 
 if __name__ == '__main__':
-    img = mandelbrot_img(Mandelbrot(100,1000))
+    m=Mandelbrot(100,1000)
+    img = m.mandelbrot_img()
     from visualisation import show_image
-    show_image(img)
+    show_image(img, m.N)
