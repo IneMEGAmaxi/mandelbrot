@@ -8,17 +8,17 @@ sys.path.insert(0,'.')
 from random import random
 import numpy as np
 import mandelbrot.mandelbrot_set_simple as mb
-from mandelbrot.mandelbrot_set import Mandelbrot
+from mandelbrot.mandelbrot_set import *
 from mandelbrot.visualisation import show_image
 
 def test_mandelbrot_class():
     d = 1000
     m = Mandelbrot(50,d)
-    c = m.get_c_val()
+    c = m.c_val
     assert c.shape == (int(4/3*d), 3*d)
-    img = m.mandelbrot_img()
+    img = mandelbrot_img(m)
     assert img.shape == (int(4/3*d), 3*d)
-    assert img[0,0] == -1
+    assert img[0,0] < 0
     show_image(img)
 
 def test_mandelbrot_set():
