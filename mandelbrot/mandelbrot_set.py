@@ -16,17 +16,16 @@ class Mandelbrot:
         return X + Y*1j
 
     def mandelbrot_img(self):
-        return self.get_escape_iter(self.c_val, self.N)
+        return get_escape_iter(self.c_val, self.N)
 
-    @staticmethod
-    @numba.jit
-    def get_escape_iter(c_val, N):
-        img = np.zeros(c_val.shape, dtype=np.int32)
-        for (i, j), c in np.ndenumerate(c_val):
-            img[i,j] = escape_iter(c, N)
-        return img
+@numba.jit
+def get_escape_iter(c_val, N):
+    img = np.zeros(c_val.shape, dtype=np.float64)
+    for (i, j), c in np.ndenumerate(c_val):
+        img[i,j] = escape_iter(c, N)
+    return img
 
-@profile
+#@profile
 @numba.jit
 def escape_iter(c, N):
     z = 0
@@ -39,6 +38,6 @@ def escape_iter(c, N):
 
 if __name__ == '__main__':
     m=Mandelbrot(100,1000)
-    img = m.mandelbrot_img()
+    img = get_escape_iter(m.c_val, m.N)
     from visualisation import show_image
     show_image(img, m.N)

@@ -11,15 +11,16 @@ import mandelbrot.mandelbrot_set_simple as mb
 from mandelbrot.mandelbrot_set import *
 from mandelbrot.visualisation import show_image
 
+@profile
 def test_mandelbrot_class():
     d = 1000
-    m = Mandelbrot(50,d)
+    m = Mandelbrot(100,d)
     c = m.c_val
     assert c.shape == (int(4/3*d), 3*d)
-    img = mandelbrot_img(m)
+    img = m.mandelbrot_img()
     assert img.shape == (int(4/3*d), 3*d)
     assert img[0,0] < 0
-    show_image(img)
+    show_image(img, m.N)
 
 def test_mandelbrot_set():
     # any complex nr norm>2 should return 0
@@ -47,7 +48,7 @@ def test_mandelbrot_set():
 # that the source directory is on the path
 # ==============================================================================
 if __name__ == "__main__":
-    the_test_you_want_to_debug = test_mandelbrot_set
+    the_test_you_want_to_debug = test_mandelbrot_class
 
     print("__main__ running", the_test_you_want_to_debug)
     the_test_you_want_to_debug()
