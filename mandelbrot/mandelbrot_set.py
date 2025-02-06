@@ -1,5 +1,6 @@
 import numpy as np
 from math import log
+from line_profiler import profile
 
 class Mandelbrot:
     xmin = -2; xmax = 1; ymin = 0; ymax = 4/3
@@ -14,23 +15,26 @@ class Mandelbrot:
         X, Y = np.meshgrid(x,y)
         return X + Y*1j
     
-    def mandelbrot_img(self):
-        img = np.zeros(self.c_val.shape)
-        for (i, j), c in np.ndenumerate(self.c_val):
-            img[i,j] = self.escape_iter(c)
-        return img
-    
-    def escape_iter(self, c):
-        z_old = 0
-        for i in range(self.N):
-            z = z_old**2 + c
-            if abs(z) > 2:
-                return i + 1 - log(log(abs(z))) / log(2)
-            z_old = z
-        return -1
+def mandelbrot_img(mb: Mandelbrot):
+    c_val = mb.c_val
+    N = mb.N
+    img = np.zeros(c_val.shape)
+    for (i, j), c in np.ndenumerate(c_val):
+        img[i,j] = escape_iter(c, N)
+    return img
+
+@profile
+def escape_iter(c, N):
+    z_old = 0
+    for i in range(N):
+        z = z_old**2 + c
+        if abs(z) > 2:
+            return i + 1 - log(log(abs(z))) / log(2)
+        z_old = z
+    return -1
 
 
 if __name__ == '__main__':
-    img = Mandelbrot(100,1000).mandelbrot_img()
-    #from visualisation import show_image
-    #show_image(img)
+    img = mandelbrot_img(Mandelbrot(100,1000))
+    from visualisation import show_image
+    show_image(img)

@@ -1,6 +1,6 @@
 import numpy as np
 from math import log
-N = 50
+N = 10000
 
 def mandelbrot_set(c):
     z_old = 0
@@ -12,7 +12,7 @@ def mandelbrot_set(c):
     return -1
 
 def mandelbrot_img():
-    d = 100
+    d = 5000
     x = 3*d
     y = (int) (4*d/3)
     img = np.zeros((y, x))
@@ -24,7 +24,7 @@ def mandelbrot_img():
             c_val[xi,yi] = cx + cy*1j
     for xi in range(x):
         for yi in range(y):
-            img[yi, xi] = mandelbrot_set(c_val[xi, yi])
+            img[yi, xi] = mandelbrot_set_smooth(c_val[xi, yi])
     return img
 
 def mandelbrot_set_smooth(c):
