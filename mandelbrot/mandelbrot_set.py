@@ -1,7 +1,7 @@
 import numpy as np
 from math import log
 from line_profiler import profile
-
+import numba
 class Mandelbrot:
     xmin = -2; xmax = 1; ymin = 0; ymax = 4/3
     def __init__(self, max_iter, pixel_density):
@@ -24,13 +24,13 @@ def mandelbrot_img(mb: Mandelbrot):
     return img
 
 @profile
+@numba.jit
 def escape_iter(c, N):
-    z_old = 0
+    z = 0
     for i in range(N):
-        z = z_old**2 + c
+        z = z*z + c
         if abs(z) > 2:
-            return i + 1 - log(log(abs(z))) / log(2)
-        z_old = z
+            return i + 1 - log(log(abs(z))) / 0.6931471805599453
     return -1
 
 

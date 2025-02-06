@@ -1,6 +1,6 @@
 import numpy as np
 from math import log
-N = 10000
+N = 50
 
 def mandelbrot_set(c):
     z_old = 0
@@ -12,7 +12,7 @@ def mandelbrot_set(c):
     return -1
 
 def mandelbrot_img():
-    d = 5000
+    d = 100
     x = 3*d
     y = (int) (4*d/3)
     img = np.zeros((y, x))
