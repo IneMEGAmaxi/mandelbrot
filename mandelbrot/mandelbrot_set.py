@@ -2,7 +2,7 @@ import numpy as np
 from math import log
 from line_profiler import profile
 import numba
-class Mandelbrot:
+class Mandelbrot:#d=5000
     xmin = -2; xmax = 1; ymin = 0; ymax = 4/3
     def __init__(self, max_iter, pixel_density):
         self.N = max_iter
@@ -13,14 +13,14 @@ class Mandelbrot:
         x = np.linspace(self.xmin, self.xmax, int((self.xmax-self.xmin)*self.d))
         y = np.linspace(self.ymin, self.ymax, int((self.ymax-self.ymin)*self.d))
         X, Y = np.meshgrid(x,y)
-        return X + Y*1j
+        return X + Y*1j #1.49011612 GiB
 
     def mandelbrot_img(self):
         return get_escape_iter(self.c_val, self.N)
 
 @numba.jit
 def get_escape_iter(c_val, N):
-    img = np.zeros(c_val.shape, dtype=np.float64)
+    img = np.zeros(c_val.shape, dtype=np.float64) # 762.939453 MiB -> cache = 12 MiB 
     for (i, j), c in np.ndenumerate(c_val):
         img[i,j] = escape_iter(c, N)
     return img
