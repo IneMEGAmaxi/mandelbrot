@@ -1,6 +1,7 @@
 project(CPPmandelbrot_set)
 cmake_minimum_required(VERSION 3.18...3.22)
 find_package(Python 3.8 COMPONENTS Interpreter Development.Module REQUIRED) # minimal python is 3.8
+find_package(OpenMP REQUIRED)
 
 # Configure CMake to perform an optimized release build by default unless another build type is specified.
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -20,7 +21,7 @@ nanobind_add_module(CPPmandelbrot_set CPPmandelbrot_set.cpp)
 
 # install the module
 install(TARGETS CPPmandelbrot_set DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/..")
-
+target_link_libraries(CPPmandelbrot_set PUBLIC OpenMP::OpenMP_CXX)
 # generate/build/install _cmake_build directory
 # > cmake -S . -B _cmake_build
 # > cmake --build _cmake_build
