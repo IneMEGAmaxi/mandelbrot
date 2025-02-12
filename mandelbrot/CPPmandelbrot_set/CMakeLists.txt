@@ -1,5 +1,5 @@
-project(CPPmandelbrot_set)
 cmake_minimum_required(VERSION 3.18...3.22)
+project(CPPmandelbrot_set)
 find_package(Python 3.8 COMPONENTS Interpreter Development.Module REQUIRED) # minimal python is 3.8
 find_package(OpenMP REQUIRED)
 

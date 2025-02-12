@@ -122,3 +122,10 @@ _build/
 
 # PyCharm
 .idea/
+unit_conversion.py
+simple.txt
+numba.txt
+numba2.txt
+prof-no_abs.txt
+prof.txt
+prof2.txt

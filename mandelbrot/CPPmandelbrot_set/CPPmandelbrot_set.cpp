@@ -19,7 +19,7 @@ mandelbrot( nb::ndarray<std::complex<double>, nb::ndim<2>>  c_val // in
 {
     size_t rows = c_val.shape(0);
     size_t cols = c_val.shape(1);
-    # pragma omp parallel for collapse(2)
+    # pragma omp parallel for collapse(2) schedule(runtime)
     for (size_t i = 0; i < rows; ++i) {
         for (size_t j = 0; j < cols; ++j) {
             std::complex<double> c = c_val(i, j);
