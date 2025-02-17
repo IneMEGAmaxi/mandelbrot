@@ -1,6 +1,6 @@
 import numpy as np
 from math import log
-from line_profiler import profile
+from memory_profiler import profile
 import numba
 class Mandelbrot:#d=5000
     xmin = -2; xmax = 1; ymin = 0; ymax = 4/3
