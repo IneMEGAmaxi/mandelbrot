@@ -136,3 +136,5 @@ test_CPPmandelbrot_set.py.lprof
 test_mandelbrot.py.lprof
 conversion.py
 unit_conversion.py
+my_program.prof
+my_program2.prof
